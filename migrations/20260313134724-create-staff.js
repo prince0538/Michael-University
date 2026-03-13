@@ -3,24 +3,35 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Staffs', {
-      id: {
+      StaffId: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       StaffName: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       staffCode: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       Gender: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.ENUM('Female', 'Male')
       },
       qualifications: {
+        allowNull: false,
         type: Sequelize.STRING
       },
+      facultyId: {
+        allowNull: false,
+        type:Sequelize.UUID,
+        references: {
+          model: "Faculties",
+          key: "facultyId"
+        },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -28,7 +39,8 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+    }
     });
   },
   async down(queryInterface, Sequelize) {

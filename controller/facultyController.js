@@ -7,8 +7,6 @@ exports.createFaculty = async (req,res) => {
         console.log(facultyCode)
 
         const formatFaculty = facultyName.charAt(0).toUpperCase() + facultyName.charAt(2).toUpperCase() + facultyName.charAt(3).toUpperCase()
-        
-
 
         const newFaculty = await faculty.create({
             facultyName,
