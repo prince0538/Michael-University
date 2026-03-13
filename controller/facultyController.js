@@ -4,14 +4,16 @@ exports.createFaculty = async (req,res) => {
     try {
 
         const {facultyName, dean, facultyCode} = req.body;
+        console.log(facultyCode)
 
         const formatFaculty = facultyName.charAt(0).toUpperCase() + facultyName.charAt(2).toUpperCase() + facultyName.charAt(3).toUpperCase()
+        
 
 
         const newFaculty = await faculty.create({
             facultyName,
             dean,
-            facultyCode: formatFaculty
+            facultyCode:formatFaculty
         });
         res.status(201).json({
             message: 'faculty created successfully',
