@@ -6,11 +6,11 @@ const { defaultValueSchemable } = require('sequelize/lib/utils');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Departments', {
-      id: {
+      DepartmentId: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue:Sequelize.UUID
+        defaultValue:Sequelize.UUIDV4
       },
       depName: {
         type: Sequelize.STRING,
@@ -24,6 +24,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      facultyId: {
+        allowNull: false,
+        type:Sequelize.UUID,
+        references: {
+          model: "Faculties",
+          key: "facultyId"
+        }
+        
+      },
       dateCreated: {
         allowNull: false,
         type: Sequelize.DATE
@@ -32,6 +41,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+      
     });
   },
   async down(queryInterface, Sequelize) {
