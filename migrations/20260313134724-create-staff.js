@@ -28,9 +28,10 @@ module.exports = {
       facultyId: {
         allowNull: false,
         type:Sequelize.UUID,
+        foreignKey:true,
         references: {
           model: "Faculties",
-          key: "facultyId"
+          key: "id"
         },
       createdAt: {
         allowNull: false,
