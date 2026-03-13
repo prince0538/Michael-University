@@ -1,24 +1,39 @@
-const department = require('../models')
+const {Department} = require('../models')
+const {Faculty} = require('../models')
 
-exports.createDep = async(req, res)=>{
+exports.addDep = async(req, res)=>{
     try {
-        const {depName,depCode,Hod}=req.body
+        const {facultyId} = req.params
+        const {depName, Hod}=req.body
 
-        formatDepName = depName.charAt(0).toUpperCase()+depName.slice(1)
+        const deptSplit = depName.split(" ")
 
-        const newDep = await department.create({
+        const formatDepName = deptSplit[0].charAt(0).toUpperCase()+ deptSplit[2].charAt(0).toUpperCase()
+
+        const newCode = await Faculty.findByPk(facultyId)
+        console.log(newCode.facultyCode)
+        const falCode = newCode.facultyCode
+        const depCode = `${falCode}-${formatDepName}`
+        console.log(depCode)
+
+        console.log(await Department.findAll())
+
+        const newDep = await Department.create({
             depName,
             depCode,
-            Hod
+            Hod,
+            facultyId
         })
         res.status(201).json({
             message:"student department is created",
             data:newDep
         })
     } catch (error) {
-        res.staus(500).json({
-            message:"something went wrong"
+        res.status(500).json({
+            message:"something went wrong",
+            data: error.message
         })
+        console.log(error)
 
 
     }
