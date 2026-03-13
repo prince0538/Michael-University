@@ -5,10 +5,8 @@ exports.createFaculty = async (req,res) => {
 
         const {facultyName, dean, facultyCode} = req.body;
         console.log(facultyCode)
-
-        const formatFaculty = facultyName.charAt(0).toUpperCase() + facultyName.charAt(2).toUpperCase() + facultyName.charAt(3).toUpperCase()
-        
-
+        const splitfacultyName = facultyName.split(" ")
+        const formatFaculty = splitfacultyName[0].charAt(0).toUpperCase() + splitfacultyName[2].charAt(2).toUpperCase() + splitfacultyName[3].charAt(3).toUpperCase();
 
         const newFaculty = await faculty.create({
             facultyName,

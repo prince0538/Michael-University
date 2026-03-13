@@ -10,10 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.Department.belongsTo(models.Faculty, {foreignkey:"facultyId", as:"faculty"})
     }
   }
   Department.init({
+    id: {
+    type:DataTypes.UUID,
+    defaultValue:DataTypes.UUIDV4,
+    primaryKey:true
+  },
     depName: DataTypes.STRING,
     depCode: DataTypes.STRING,
     Hod: DataTypes.STRING
