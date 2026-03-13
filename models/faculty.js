@@ -14,9 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Faculty.init({
+    id: {
+    type:DataTypes.UUID,
+    defaultValue:DataTypes.UUIDV4,
+    primaryKey:true
+  },
     facultyName: DataTypes.STRING,
     dean: DataTypes.STRING,
-    facultyCode: DataTypes.STRING
+    facultyCode: DataTypes.STRING,
+    dateCreated: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Faculty',
