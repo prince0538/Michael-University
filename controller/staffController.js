@@ -1,10 +1,17 @@
-const staff = require('../models')
-const faculty = require('../models')
+const {Staff} = require('../models')
+const {Faculty} = require('../models')
 
 exports.addStaff = async(req, res) =>{
     try{
-        const{id} = req.params
-        const { StaffName, staffCode, Gender, qualifications } = req.body
+        const{facultyId} = req.params
+        const { staffName, staffCode, Gender, qualifications } = req.body
+
+        const staffSplit = staffName.split()
+
+const newStaffName = staffSplit[0].charAt(0).toUpperCase() + staffSplit[2].charAt(0).toUpperCase() + staffSplit[3].charAt(0).toUpperCase()
+
+
+
 
         
 

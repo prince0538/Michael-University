@@ -4,7 +4,7 @@ const {Faculty} = require('../models')
 exports.addDep = async(req, res)=>{
     try {
         const {facultyId} = req.params
-        const {depName, Hod}=req.body
+        const {depName, Hod, dateCreated}=req.body
 
         const deptSplit = depName.split(" ")
 
@@ -22,7 +22,8 @@ exports.addDep = async(req, res)=>{
             depName,
             depCode,
             Hod,
-            facultyId
+            facultyId,
+            dateCreated
         })
         res.status(201).json({
             message:"student department is created",
