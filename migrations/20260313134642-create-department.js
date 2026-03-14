@@ -31,7 +31,7 @@ module.exports = {
           model: "Faculties",
           key: "facultyId"
         }
-        
+          
       },
       dateCreated: {
         allowNull: false,
