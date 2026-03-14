@@ -14,14 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Department.init({
-    id: {
+    DepartmentId: {
     type:DataTypes.UUID,
     defaultValue:DataTypes.UUIDV4,
     primaryKey:true
   },
     depName: DataTypes.STRING,
     depCode: DataTypes.STRING,
-    Hod: DataTypes.STRING
+    Hod: DataTypes.STRING,
+    dateCreated: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Department',

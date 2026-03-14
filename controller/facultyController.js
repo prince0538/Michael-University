@@ -1,17 +1,18 @@
-const {faculty} = require('../models');
+const {Faculty} = require('../models');
 
 exports.createFaculty = async (req,res) => {
     try {
 
-        const {facultyName, dean, facultyCode} = req.body;
-        console.log(facultyCode)
+        const {facultyName, dean, facultyCode, dateCreated} = req.body;
+        console.log("faculty code is?", facultyCode)
         const splitfacultyName = facultyName.split(" ")
-        const formatFaculty = splitfacultyName[0].charAt(0).toUpperCase() + splitfacultyName[2].charAt(2).toUpperCase() + splitfacultyName[3].charAt(3).toUpperCase();
+        const formatFaculty = splitfacultyName[0].charAt(0).toUpperCase() + splitfacultyName[2].charAt(0).toUpperCase() + splitfacultyName[3].charAt(0).toUpperCase();
 
-        const newFaculty = await faculty.create({
+        const newFaculty = await Faculty.create({
             facultyName,
             dean,
-            facultyCode:formatFaculty
+            facultyCode:formatFaculty,
+            dateCreated
         });
         res.status(201).json({
             message: 'faculty created successfully',
