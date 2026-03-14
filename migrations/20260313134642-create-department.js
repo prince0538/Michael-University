@@ -32,7 +32,7 @@ module.exports = {
           model: "Faculties",
           key: "id"
         }
-        
+          
       },
       dateCreated: {
         allowNull: false,
