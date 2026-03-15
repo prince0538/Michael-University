@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Staff.init({
+    staffId: {
+    type:DataTypes.UUID,
+    defaultValue:DataTypes.UUIDV4,
+    primaryKey:true
+  },
     StaffName: DataTypes.STRING,
     staffCode: DataTypes.STRING,
     Gender: DataTypes.STRING,
