@@ -6,19 +6,21 @@ exports.addStaff = async(req, res) =>{
         const{facultyId} = req.params
         const { staffName, Gender, qualifications } = req.body
 
-        const staffSplit = staffName.split()
+        const staffSplit = staffName.split(" ")
 
-const newStaffName = staffSplit[0].charAt(0).toUpperCase() + staffSplit[2].charAt(0).toUpperCase() + staffSplit[3].charAt(0).toUpperCase()
+        const newStaffName = staffSplit[0].charAt(0).toUpperCase() + staffSplit[2].charAt(0).toUpperCase() + staffSplit[3].charAt(0).toUpperCase()
+        console.log(newStaff)
 
-console.log("this is a new staffName", newStaffName)
-const newCode = await Faculty.findByPk(facultyId)
+        console.log("this is a new staffName", newStaffName)
+    // const newCode = await Faculty.findByPk(facultyId)
+    // console.log(newCode)
         
 
-        const newStaff = await Staff.create({
-            staffName,
-            Gender,
-            qualifications   
-        })
+        // const newStaff = await Staff.create({
+        //     staffName,
+        //     Gender,
+        //     qualifications   
+        // })
 
     }
     catch(error){
@@ -27,5 +29,5 @@ const newCode = await Faculty.findByPk(facultyId)
         })
         console.log(error.message)
 
-    }
+}
 }
