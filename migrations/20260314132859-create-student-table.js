@@ -1,43 +1,30 @@
 'use strict';
-
-const { defaultValueSchemable } = require('sequelize/lib/utils');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Departments', {
-      DepartmentId: {
+    await queryInterface.createTable('studentTables', {
+      id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue:Sequelize.UUIDV4
       },
-      depName: {
+      matricNumber: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      studentName: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      depCode: {
+      age: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      gender: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      Hod: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      facultyId: {
-        allowNull: false,
-        type:Sequelize.UUID,
-        foreignKey:true,
-        references: {
-          model: "Faculties",
-          key: "id"
-        }
-          
-      },
-      dateCreated: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -46,10 +33,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-      
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Departments');
+    await queryInterface.dropTable('studentTables');
   }
 };
