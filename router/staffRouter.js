@@ -4,7 +4,7 @@ const router = express.Router()
 
 const { addStaff } = require('../controller/staffController')
 
-router.post('/staff/:facultyId', addStaff)
+router.post('/staff/:facultyId', addStaff)   
 
 
 module.exports = router
