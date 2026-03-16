@@ -75,19 +75,9 @@ exports.addStaff = async(req, res) =>{
         const {StaffName,Gender,qualifications } = req.body
 
         const faculty = await Faculty.findByPk(facultyId)
-        console.log(faculty.facultyId)
-
-
-        const newCode = await Faculty.findByPk(facultyId)
-        console.log(newCode.facultyCode)
-        const falCode = newCode.facultyCode
+        const falcode = faculty.facultyCode
         const depCode = `${falCode}-${formatDepName}`
         console.log(depCode)
-
-
-
-
-
         res.status(200).json({
             message: "this is working",
             data: faculty
@@ -100,5 +90,128 @@ exports.addStaff = async(req, res) =>{
             data: error.message
         })
 
+    }
+}
+
+
+exports.createStaff = async (req, res) => {
+    try {
+        const {facultyId} = req.params;
+        const { staffName, gender, qualification } = req.body;
+
+        // find facultyCode by parsed id
+        const checkFalCode = await facultyTable.findByPk(facultyId)
+        const falCode = checkFalCode.facultyCode
+
+        
+        console.log(staffCode)
+
+        const newStaff = await staffTable.create({
+            staffName,
+            gender,
+            qualification,
+            facultyId,
+            staffCode,
+            dateJoined
+        });
+
+        res.status(201).json({
+            message: 'Staff created successfully',
+            data: newStaff
+        })
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).json({
+            mesage: "Something went wrong"
+        })
+    }
+}
+
+exports.getAllStaff = async (req, res) => {
+    try {
+        const allStaff = await Staff.findAll()
+
+        res.status(200).json({
+            message: "Fetched all Staffs successfully",
+            data: allStaff
+        })
+    } catch (error) {
+        console.log(error.message),
+        res.status(500).json({
+            message:"Something went wrong"
+        })
+    }
+}
+
+exports.updateStaff = async (req, res) => {
+    try {
+        const { staffId } = req.params
+        const { staffName, gender, qualification } = req.body
+        // console.log(staffId)
+
+        const findStaff = await Staff.findByPk(staffId)
+        // console.log(findStaff)
+
+        if (!findStaff) {
+            return res.status(404).json({
+                message: "Staff with this Id does not exist"
+            })
+        }
+
+        const updatedStaff = { 
+                staffName: staffName || findStaff.staffName ,
+                gender: gender || findStaff.gender ,
+                qualification: qualification || findStaff.qualification  ,
+                facultyId: findStaff.facultyId,
+                staffCode: findStaff.staffCode,
+                dateJoined: findStaff.dateJoined
+        }
+
+        const updatstaff = await staffTable.update(updatedStaff, {
+            where: {
+                staffId: staffId
+            }
+        })
+
+
+        res.status(200).json({
+            message: "Staff Info Updated successfully",
+            data: updatstaff
+        })
+
+    } catch (error) {
+        console.log(error.message),
+        res.status(500).json({
+            message:"Something went wrong"
+        })
+    }
+}
+
+exports.deleteStaff = async (req, res) => {
+    try {
+        const { staffId } = req.params
+
+        const findStaff = await Staff.findByPk(staffId)
+
+        if (!findStaff) {
+            return res.status(404).json({
+                message: "Staff with Id not found"
+            })
+        }
+
+        await staffTable.destroy({
+            where:{
+                staffId: staffId
+            }
+        })
+
+        res.status(200).json({
+            message:" Staff deleted sucessfully"
+        })
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).json({
+            message:"Something went wrong"
+        })
     }
 }
