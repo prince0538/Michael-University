@@ -39,3 +39,18 @@ exports.addDep = async(req, res)=>{
 
     }
 }
+exports.findDep = async(req, res)=>{
+    try {
+        const findDep = await Department.findAll()
+
+        res.status(201).json({
+            message:"all department created succesfully",
+            data:findDep
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message:"Something went wrong"
+        })
+    }
+}

@@ -13,6 +13,8 @@ app.use(deptRouter)
 app.use(staffRout)
 app.use(courseRoutes)
 
+
+
 app.listen(PORT,() => {
     console.log(`Server is running on PORT:${PORT}`)
 })
