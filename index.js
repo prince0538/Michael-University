@@ -9,6 +9,7 @@ const deptRouter = require('./router/departmentRoutes')
 const staffRout = require('./router/staffRouter')
 app.use(Router)
 app.use(deptRouter)
+app.use(staffRout)
 
 app.listen(PORT,() => {
     console.log(`Server is running on PORT:${PORT}`)
